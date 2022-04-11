@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TECPOSTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TECPOSTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PacientsModelSet" EntityType="TECPOSTModel.PacientsModel" />
+    <EntitySet Name="MeshModelSet" EntityType="TECPOSTModel.MeshModel" />
+    <EntitySet Name="CADModelSet" EntityType="TECPOSTModel.CADModel" />
+    <EntitySet Name="CAMModelSet" EntityType="TECPOSTModel.CAMModel" />
+    <EntitySet Name="SystemUsersModelSet" EntityType="TECPOSTModel.SystemUsersModel" />
+    <EntitySet Name="CitiesModelSet" EntityType="TECPOSTModel.CitiesModel" />
+    <EntitySet Name="StatusModelSet" EntityType="TECPOSTModel.StatusModel" />
+    <EntitySet Name="StatesModelSet" EntityType="TECPOSTModel.StatesModel" />
+    <EntitySet Name="ProjectsModelSet" EntityType="TECPOSTModel.ProjectsModel" />
+    <AssociationSet Name="PacientsModelCitiesModel" Association="TECPOSTModel.PacientsModelCitiesModel">
+      <End Role="PacientsModel" EntitySet="PacientsModelSet" />
+      <End Role="CitiesModel" EntitySet="CitiesModelSet" />
+    </AssociationSet>
+    <AssociationSet Name="PacientsModelStatesModel" Association="TECPOSTModel.PacientsModelStatesModel">
+      <End Role="PacientsModel" EntitySet="PacientsModelSet" />
+      <End Role="StatesModel" EntitySet="StatesModelSet" />
+    </AssociationSet>
+    <AssociationSet Name="PacientsModelProjectsModel" Association="TECPOSTModel.PacientsModelProjectsModel">
+      <End Role="PacientsModel" EntitySet="PacientsModelSet" />
+      <End Role="ProjectsModel" EntitySet="ProjectsModelSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectsModelStatusModel" Association="TECPOSTModel.ProjectsModelStatusModel">
+      <End Role="ProjectsModel" EntitySet="ProjectsModelSet" />
+      <End Role="StatusModel" EntitySet="StatusModelSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectsModelMeshModel" Association="TECPOSTModel.ProjectsModelMeshModel">
+      <End Role="ProjectsModel" EntitySet="ProjectsModelSet" />
+      <End Role="MeshModel" EntitySet="MeshModelSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectsModelCADModel" Association="TECPOSTModel.ProjectsModelCADModel">
+      <End Role="ProjectsModel" EntitySet="ProjectsModelSet" />
+      <End Role="CADModel" EntitySet="CADModelSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectsModelCAMModel" Association="TECPOSTModel.ProjectsModelCAMModel">
+      <End Role="ProjectsModel" EntitySet="ProjectsModelSet" />
+      <End Role="CAMModel" EntitySet="CAMModelSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PacientsModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CPF" Type="Int64" Nullable="false" />
+    <Property Name="RG" Type="Int64" Nullable="false" />
+    <Property Name="DataNascimento" Type="DateTime" Nullable="false" />
+    <Property Name="Nome" Type="String" Nullable="false" />
+    <Property Name="Endereco" Type="String" Nullable="false" />
+    <Property Name="Complemento" Type="String" Nullable="false" />
+    <Property Name="Bairro" Type="String" Nullable="false" />
+    <Property Name="CEP" Type="Int64" Nullable="false" />
+    <Property Name="Telefone" Type="Int64" Nullable="false" />
+    <Property Name="Celular1" Type="Int64" Nullable="false" />
+    <Property Name="Celular2" Type="Int64" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <NavigationProperty Name="CitiesModel" Relationship="TECPOSTModel.PacientsModelCitiesModel" FromRole="PacientsModel" ToRole="CitiesModel" />
+    <NavigationProperty Name="StatesModel" Relationship="TECPOSTModel.PacientsModelStatesModel" FromRole="PacientsModel" ToRole="StatesModel" />
+    <NavigationProperty Name="ProjectsModel" Relationship="TECPOSTModel.PacientsModelProjectsModel" FromRole="PacientsModel" ToRole="ProjectsModel" />
+  </EntityType>
+  <EntityType Name="MeshModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mesh" Type="Binary" Nullable="false" />
+    <Property Name="Nome" Type="String" Nullable="false" />
+    <NavigationProperty Name="ProjectsModel" Relationship="TECPOSTModel.ProjectsModelMeshModel" FromRole="MeshModel" ToRole="ProjectsModel" />
+  </EntityType>
+  <EntityType Name="CADModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CAD" Type="Binary" Nullable="false" />
+    <Property Name="Nome" Type="String" Nullable="false" />
+    <NavigationProperty Name="ProjectsModel" Relationship="TECPOSTModel.ProjectsModelCADModel" FromRole="CADModel" ToRole="ProjectsModel" />
+  </EntityType>
+  <EntityType Name="CAMModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CAM" Type="Binary" Nullable="false" />
+    <Property Name="Nome" Type="String" Nullable="false" />
+    <NavigationProperty Name="ProjectsModel" Relationship="TECPOSTModel.ProjectsModelCAMModel" FromRole="CAMModel" ToRole="ProjectsModel" />
+  </EntityType>
+  <EntityType Name="SystemUsersModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CitiesModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="PacientsModel" Relationship="TECPOSTModel.PacientsModelCitiesModel" FromRole="CitiesModel" ToRole="PacientsModel" />
+  </EntityType>
+  <EntityType Name="StatusModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" Nullable="false" />
+    <NavigationProperty Name="ProjectsModel" Relationship="TECPOSTModel.ProjectsModelStatusModel" FromRole="StatusModel" ToRole="ProjectsModel" />
+  </EntityType>
+  <EntityType Name="StatesModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="PacientsModel" Relationship="TECPOSTModel.PacientsModelStatesModel" FromRole="StatesModel" ToRole="PacientsModel" />
+  </EntityType>
+  <EntityType Name="ProjectsModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="PacientsModel" Relationship="TECPOSTModel.PacientsModelProjectsModel" FromRole="ProjectsModel" ToRole="PacientsModel" />
+    <NavigationProperty Name="StatusModel" Relationship="TECPOSTModel.ProjectsModelStatusModel" FromRole="ProjectsModel" ToRole="StatusModel" />
+    <NavigationProperty Name="MeshModel" Relationship="TECPOSTModel.ProjectsModelMeshModel" FromRole="ProjectsModel" ToRole="MeshModel" />
+    <NavigationProperty Name="CADModel" Relationship="TECPOSTModel.ProjectsModelCADModel" FromRole="ProjectsModel" ToRole="CADModel" />
+    <NavigationProperty Name="CAMModel" Relationship="TECPOSTModel.ProjectsModelCAMModel" FromRole="ProjectsModel" ToRole="CAMModel" />
+  </EntityType>
+  <Association Name="PacientsModelCitiesModel">
+    <End Type="TECPOSTModel.PacientsModel" Role="PacientsModel" Multiplicity="1" />
+    <End Type="TECPOSTModel.CitiesModel" Role="CitiesModel" Multiplicity="0..1" />
+  </Association>
+  <Association Name="PacientsModelStatesModel">
+    <End Type="TECPOSTModel.PacientsModel" Role="PacientsModel" Multiplicity="1" />
+    <End Type="TECPOSTModel.StatesModel" Role="StatesModel" Multiplicity="0..1" />
+  </Association>
+  <Association Name="PacientsModelProjectsModel">
+    <End Type="TECPOSTModel.PacientsModel" Role="PacientsModel" Multiplicity="1" />
+    <End Type="TECPOSTModel.ProjectsModel" Role="ProjectsModel" Multiplicity="*" />
+  </Association>
+  <Association Name="ProjectsModelStatusModel">
+    <End Type="TECPOSTModel.ProjectsModel" Role="ProjectsModel" Multiplicity="1" />
+    <End Type="TECPOSTModel.StatusModel" Role="StatusModel" Multiplicity="1" />
+  </Association>
+  <Association Name="ProjectsModelMeshModel">
+    <End Type="TECPOSTModel.ProjectsModel" Role="ProjectsModel" Multiplicity="1" />
+    <End Type="TECPOSTModel.MeshModel" Role="MeshModel" Multiplicity="*" />
+  </Association>
+  <Association Name="ProjectsModelCADModel">
+    <End Type="TECPOSTModel.ProjectsModel" Role="ProjectsModel" Multiplicity="1" />
+    <End Type="TECPOSTModel.CADModel" Role="CADModel" Multiplicity="*" />
+  </Association>
+  <Association Name="ProjectsModelCAMModel">
+    <End Type="TECPOSTModel.ProjectsModel" Role="ProjectsModel" Multiplicity="1" />
+    <End Type="TECPOSTModel.CAMModel" Role="CAMModel" Multiplicity="*" />
+  </Association>
+</Schema>

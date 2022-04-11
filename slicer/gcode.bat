@@ -1,0 +1,1 @@
+slicer\Slic3r-console.exe .\projeto\solido\auxModelo.obj --perimeters 1 --print-center 0,0 --layer-height 1.0 --fill-density 99.9 --solid-infill-below-area 20 --solid-infill-every-layers 1 --fill-angle 45 --filament-diameter 1.7 --nozzle-diameter 1.7 --output .\projeto\tmp\Individual.gcode

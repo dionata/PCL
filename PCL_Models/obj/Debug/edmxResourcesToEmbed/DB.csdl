@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="pacientsSet" EntityType="Model1.pacients" />
+    <EntitySet Name="usersSet" EntityType="Model1.users" />
+    <EntitySet Name="statusSet" EntityType="Model1.status" />
+    <EntitySet Name="camsSet" EntityType="Model1.cams" />
+    <EntitySet Name="citiesSet" EntityType="Model1.cities" />
+    <EntitySet Name="cadsSet" EntityType="Model1.cads" />
+    <EntitySet Name="statesSet" EntityType="Model1.states" />
+    <EntitySet Name="meshesSet" EntityType="Model1.meshes" />
+    <EntitySet Name="projectsSet" EntityType="Model1.projects" />
+    <AssociationSet Name="pacientsprojects" Association="Model1.pacientsprojects">
+      <End Role="pacients" EntitySet="pacientsSet" />
+      <End Role="projects" EntitySet="projectsSet" />
+    </AssociationSet>
+    <AssociationSet Name="pacientsstates" Association="Model1.pacientsstates">
+      <End Role="pacients" EntitySet="pacientsSet" />
+      <End Role="states" EntitySet="statesSet" />
+    </AssociationSet>
+    <AssociationSet Name="pacientscities" Association="Model1.pacientscities">
+      <End Role="pacients" EntitySet="pacientsSet" />
+      <End Role="cities" EntitySet="citiesSet" />
+    </AssociationSet>
+    <AssociationSet Name="statusprojects" Association="Model1.statusprojects">
+      <End Role="status" EntitySet="statusSet" />
+      <End Role="projects" EntitySet="projectsSet" />
+    </AssociationSet>
+    <AssociationSet Name="projectscads" Association="Model1.projectscads">
+      <End Role="projects" EntitySet="projectsSet" />
+      <End Role="cads" EntitySet="cadsSet" />
+    </AssociationSet>
+    <AssociationSet Name="projectscams" Association="Model1.projectscams">
+      <End Role="projects" EntitySet="projectsSet" />
+      <End Role="cams" EntitySet="camsSet" />
+    </AssociationSet>
+    <AssociationSet Name="projectsmeshes" Association="Model1.projectsmeshes">
+      <End Role="projects" EntitySet="projectsSet" />
+      <End Role="meshes" EntitySet="meshesSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="pacients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CPF" Type="String" Nullable="false" />
+    <Property Name="RG" Type="String" Nullable="false" />
+    <Property Name="date" Type="String" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" />
+    <Property Name="states" Type="String" Nullable="false" />
+    <Property Name="cities" Type="String" Nullable="false" />
+    <Property Name="address" Type="String" Nullable="false" />
+    <Property Name="complement" Type="String" Nullable="false" />
+    <Property Name="neighborhood" Type="String" Nullable="false" />
+    <Property Name="CEP" Type="String" Nullable="false" />
+    <Property Name="telephone" Type="String" Nullable="false" />
+    <Property Name="cellPhone1" Type="String" Nullable="false" />
+    <Property Name="cellPhone2" Type="String" Nullable="false" />
+    <Property Name="email" Type="String" Nullable="false" />
+    <NavigationProperty Name="projects" Relationship="Model1.pacientsprojects" FromRole="pacients" ToRole="projects" />
+    <NavigationProperty Name="states1" Relationship="Model1.pacientsstates" FromRole="pacients" ToRole="states" />
+    <NavigationProperty Name="cities1" Relationship="Model1.pacientscities" FromRole="pacients" ToRole="cities" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" />
+    <Property Name="email" Type="String" Nullable="false" />
+    <Property Name="password" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" />
+    <NavigationProperty Name="projects" Relationship="Model1.statusprojects" FromRole="status" ToRole="projects" />
+  </EntityType>
+  <EntityType Name="cams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cam" Type="String" Nullable="false" />
+    <NavigationProperty Name="projects" Relationship="Model1.projectscams" FromRole="cams" ToRole="projects" />
+  </EntityType>
+  <EntityType Name="cities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" />
+    <NavigationProperty Name="pacients" Relationship="Model1.pacientscities" FromRole="cities" ToRole="pacients" />
+  </EntityType>
+  <EntityType Name="cads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cad" Type="String" Nullable="false" />
+    <NavigationProperty Name="projects" Relationship="Model1.projectscads" FromRole="cads" ToRole="projects" />
+  </EntityType>
+  <EntityType Name="states">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" />
+    <NavigationProperty Name="pacients" Relationship="Model1.pacientsstates" FromRole="states" ToRole="pacients" />
+  </EntityType>
+  <EntityType Name="meshes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mesh" Type="String" Nullable="false" />
+    <NavigationProperty Name="projects" Relationship="Model1.projectsmeshes" FromRole="meshes" ToRole="projects" />
+  </EntityType>
+  <EntityType Name="projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" />
+    <Property Name="status" Type="String" Nullable="false" />
+    <NavigationProperty Name="pacients" Relationship="Model1.pacientsprojects" FromRole="projects" ToRole="pacients" />
+    <NavigationProperty Name="status1" Relationship="Model1.statusprojects" FromRole="projects" ToRole="status" />
+    <NavigationProperty Name="cads" Relationship="Model1.projectscads" FromRole="projects" ToRole="cads" />
+    <NavigationProperty Name="cams" Relationship="Model1.projectscams" FromRole="projects" ToRole="cams" />
+    <NavigationProperty Name="meshes" Relationship="Model1.projectsmeshes" FromRole="projects" ToRole="meshes" />
+  </EntityType>
+  <Association Name="pacientsprojects">
+    <End Type="Model1.pacients" Role="pacients" Multiplicity="1" />
+    <End Type="Model1.projects" Role="projects" Multiplicity="*" />
+  </Association>
+  <Association Name="pacientsstates">
+    <End Type="Model1.pacients" Role="pacients" Multiplicity="1" />
+    <End Type="Model1.states" Role="states" Multiplicity="*" />
+  </Association>
+  <Association Name="pacientscities">
+    <End Type="Model1.pacients" Role="pacients" Multiplicity="1" />
+    <End Type="Model1.cities" Role="cities" Multiplicity="*" />
+  </Association>
+  <Association Name="statusprojects">
+    <End Type="Model1.status" Role="status" Multiplicity="1" />
+    <End Type="Model1.projects" Role="projects" Multiplicity="1" />
+  </Association>
+  <Association Name="projectscads">
+    <End Type="Model1.projects" Role="projects" Multiplicity="1" />
+    <End Type="Model1.cads" Role="cads" Multiplicity="1" />
+  </Association>
+  <Association Name="projectscams">
+    <End Type="Model1.projects" Role="projects" Multiplicity="1" />
+    <End Type="Model1.cams" Role="cams" Multiplicity="*" />
+  </Association>
+  <Association Name="projectsmeshes">
+    <End Type="Model1.projects" Role="projects" Multiplicity="1" />
+    <End Type="Model1.meshes" Role="meshes" Multiplicity="1" />
+  </Association>
+</Schema>

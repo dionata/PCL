@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TECPOSTModelStoreContainer" CdmEntityContainer="TECPOSTEntities">
+    <EntitySetMapping Name="ClientModelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TECPOSTModel.ClientModel)">
+        <MappingFragment StoreEntitySet="ClientModelSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="CPF" ColumnName="CPF" />
+          <ScalarProperty Name="RG" ColumnName="RG" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CEP" ColumnName="CEP" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Celular1" ColumnName="Celular1" />
+          <ScalarProperty Name="Celular2" ColumnName="Celular2" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeshModelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TECPOSTModel.MeshModel)">
+        <MappingFragment StoreEntitySet="MeshModelSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Mesh" ColumnName="Mesh" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CADModelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TECPOSTModel.CADModel)">
+        <MappingFragment StoreEntitySet="CADModelSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CAD" ColumnName="CAD" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAMModelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TECPOSTModel.CAMModel)">
+        <MappingFragment StoreEntitySet="CAMModelSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CAM" ColumnName="CAM" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ClientModelMeshModel" TypeName="TECPOSTModel.ClientModelMeshModel" StoreEntitySet="MeshModelSet">
+      <EndProperty Name="ClientModel">
+        <ScalarProperty Name="Id" ColumnName="ClientModel_Id" />
+      </EndProperty>
+      <EndProperty Name="MeshModel">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClientModelCADModel" TypeName="TECPOSTModel.ClientModelCADModel" StoreEntitySet="CADModelSet">
+      <EndProperty Name="ClientModel">
+        <ScalarProperty Name="Id" ColumnName="ClientModel_Id" />
+      </EndProperty>
+      <EndProperty Name="CADModel">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClientModelCAMModel" TypeName="TECPOSTModel.ClientModelCAMModel" StoreEntitySet="CAMModelSet">
+      <EndProperty Name="ClientModel">
+        <ScalarProperty Name="Id" ColumnName="ClientModel_Id" />
+      </EndProperty>
+      <EndProperty Name="CAMModel">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

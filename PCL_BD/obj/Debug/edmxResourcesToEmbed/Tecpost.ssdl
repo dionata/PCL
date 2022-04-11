@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TECPOSTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TECPOSTModelStoreContainer">
+    <EntitySet Name="ClientModelSet" EntityType="TECPOSTModel.Store.ClientModelSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeshModelSet" EntityType="TECPOSTModel.Store.MeshModelSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CADModelSet" EntityType="TECPOSTModel.Store.CADModelSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAMModelSet" EntityType="TECPOSTModel.Store.CAMModelSet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="ClientModelMeshModel" Association="TECPOSTModel.Store.ClientModelMeshModel">
+      <End EntitySet="ClientModelSet" Role="ClientModel" />
+      <End EntitySet="MeshModelSet" Role="MeshModel" />
+    </AssociationSet>
+    <AssociationSet Name="ClientModelCADModel" Association="TECPOSTModel.Store.ClientModelCADModel">
+      <End EntitySet="ClientModelSet" Role="ClientModel" />
+      <End EntitySet="CADModelSet" Role="CADModel" />
+    </AssociationSet>
+    <AssociationSet Name="ClientModelCAMModel" Association="TECPOSTModel.Store.ClientModelCAMModel">
+      <End EntitySet="ClientModelSet" Role="ClientModel" />
+      <End EntitySet="CAMModelSet" Role="CAMModel" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ClientModelSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="Codigo" Nullable="false" Type="int" />
+    <Property Name="CPF" Nullable="false" Type="bigint" />
+    <Property Name="RG" Nullable="false" Type="bigint" />
+    <Property Name="DataNascimento" Nullable="false" Type="datetime" />
+    <Property Name="Nome" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Endereco" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Complemento" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Bairro" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Cidade" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Estado" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="CEP" Nullable="false" Type="bigint" />
+    <Property Name="Telefone" Nullable="false" Type="bigint" />
+    <Property Name="Celular1" Nullable="false" Type="bigint" />
+    <Property Name="Celular2" Nullable="false" Type="bigint" />
+    <Property Name="Email" Nullable="false" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="MeshModelSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="Mesh" Nullable="false" Type="varbinary(max)" />
+    <Property Name="Nome" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="ClientModel_Id" Nullable="false" Type="int" />
+  </EntityType>
+  <EntityType Name="CADModelSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="CAD" Nullable="false" Type="varbinary(max)" />
+    <Property Name="Nome" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="ClientModel_Id" Nullable="false" Type="int" />
+  </EntityType>
+  <EntityType Name="CAMModelSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="CAM" Nullable="false" Type="varbinary(max)" />
+    <Property Name="Nome" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="ClientModel_Id" Nullable="false" Type="int" />
+  </EntityType>
+  <Association Name="ClientModelMeshModel">
+    <End Type="TECPOSTModel.Store.ClientModelSet" Multiplicity="1" Role="ClientModel" />
+    <End Type="TECPOSTModel.Store.MeshModelSet" Multiplicity="*" Role="MeshModel" />
+    <ReferentialConstraint>
+      <Principal Role="ClientModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeshModel">
+        <PropertyRef Name="ClientModel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientModelCADModel">
+    <End Type="TECPOSTModel.Store.ClientModelSet" Multiplicity="1" Role="ClientModel" />
+    <End Type="TECPOSTModel.Store.CADModelSet" Multiplicity="*" Role="CADModel" />
+    <ReferentialConstraint>
+      <Principal Role="ClientModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CADModel">
+        <PropertyRef Name="ClientModel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientModelCAMModel">
+    <End Type="TECPOSTModel.Store.ClientModelSet" Multiplicity="1" Role="ClientModel" />
+    <End Type="TECPOSTModel.Store.CAMModelSet" Multiplicity="*" Role="CAMModel" />
+    <ReferentialConstraint>
+      <Principal Role="ClientModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CAMModel">
+        <PropertyRef Name="ClientModel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
